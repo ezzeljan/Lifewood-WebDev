@@ -1,26 +1,27 @@
 "use client"
 
 import { Mail, MapPin, Phone, ArrowUpRight, Linkedin, Twitter } from "lucide-react"
+import Link from "next/link"
 
 const footerLinks = {
   company: [
-    { label: "Our Company", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Projects", href: "#projects" },
-    { label: "Transformation", href: "#esg" },
-    { label: "Careers", href: "#careers" },
+    { label: "Our Company", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Projects", href: "/projects" },
+    { label: "Transformation", href: "/transformation" },
+    { label: "Careers", href: "/careers" },
   ],
   solutions: [
-    { label: "Data Annotation", href: "#services" },
-    { label: "AI Training Data", href: "#services" },
-    { label: "Data Processing", href: "#services" },
-    { label: "Quality Assurance", href: "#services" },
+    { label: "Data Annotation", href: "/services" },
+    { label: "AI Training Data", href: "/services" },
+    { label: "Data Processing", href: "/services" },
+    { label: "Quality Assurance", href: "/services" },
   ],
   regions: [
-    { label: "Malaysia (HQ)", href: "#global" },
-    { label: "Singapore", href: "#global" },
-    { label: "China", href: "#global" },
-    { label: "Bangladesh", href: "#global" },
+    { label: "Malaysia (HQ)", href: "/global" },
+    { label: "Singapore", href: "/global" },
+    { label: "China", href: "/global" },
+    { label: "Bangladesh", href: "/global" },
   ],
 }
 
@@ -119,12 +120,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-[0.88rem] text-white/35 transition-colors duration-300 hover:text-[var(--lw-saffron)]"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -136,12 +137,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3.5">
               {footerLinks.solutions.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-[0.88rem] text-white/35 transition-colors duration-300 hover:text-[var(--lw-saffron)]"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -153,12 +154,12 @@ export function Footer() {
             <ul className="mt-5 space-y-3.5">
               {footerLinks.regions.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-[0.88rem] text-white/35 transition-colors duration-300 hover:text-[var(--lw-saffron)]"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

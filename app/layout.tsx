@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Manrope } from 'next/font/google'
 
 import './globals.css'
+import { Navbar } from '@/components/lifewood/navbar'
+import { Footer } from '@/components/lifewood/footer'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -29,7 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={manrope.variable}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }
