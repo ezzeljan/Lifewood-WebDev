@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* Lifewood Brand Colors */
+    --background: 0 0% 100%;
+    --foreground: 150 41% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 41% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 41% 10%;
+    --primary: 155 91% 20%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 38% 91%;
+    --secondary-foreground: 150 41% 10%;
+    --muted: 0 0% 97%;
+    --muted-foreground: 150 20% 35%;
+    --accent: 33 100% 64%;
+    --accent-foreground: 150 41% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 150 10% 90%;
+    --input: 150 10% 90%;
+    --ring: 155 91% 20%;
+    --radius: 0.875rem;
+
+    /* Lifewood custom tokens */
+    --lw-green: #046241;
+    --lw-dark: #133020;
+    --lw-saffron: #FFB347;
+    --lw-earth: #FFC370;
+    --lw-paper: #F5EEDB;
+    --lw-sea-salt: #F9F7F7;
+    --lw-white: #FFFFFF;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.glass-dark {
+  background: rgba(4, 98, 65, 0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(4, 98, 65, 0.15);
+  color: var(--lw-dark);
+}
