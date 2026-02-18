@@ -55,7 +55,7 @@ export default function TransformationPage() {
             Back to home
           </Link>
 
-          <div className="mt-6 max-w-2xl">
+          <div className="mt-6 max-w-3xl">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--lw-saffron)]">
               ESG commitment
             </span>
@@ -64,7 +64,8 @@ export default function TransformationPage() {
             </h1>
             <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--lw-dark)]/55">
               At Lifewood, ESG is not a checkbox but a core principle woven into
-              every aspect of our operations.
+              every aspect of our operations. We believe that responsible business
+              practices and world-class technology go hand in hand.
             </p>
           </div>
         </div>
@@ -76,7 +77,10 @@ export default function TransformationPage() {
           <div className="grid items-start gap-16 lg:grid-cols-2 lg:gap-20">
             {/* Left: text + image */}
             <div>
-              <p className="text-[1.05rem] leading-relaxed text-[var(--lw-dark)]/55">
+              <h2 className="text-2xl font-bold text-[var(--lw-dark)] lg:text-3xl">
+                Leading with purpose
+              </h2>
+              <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--lw-dark)]/55">
                 From inclusive hiring practices in Bangladesh to sustainable
                 technology deployment across Asia, we lead with purpose. Our ESG
                 framework guides every strategic decision, ensuring that growth
@@ -87,6 +91,12 @@ export default function TransformationPage() {
                 at Lifewood is empowered to contribute to our sustainability goals,
                 from energy-efficient practices in our offices to community outreach
                 programs in the regions where we operate.
+              </p>
+              <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--lw-dark)]/55">
+                We actively measure and report on our environmental impact, social
+                contributions, and governance standards. Our annual ESG report is
+                shared with all stakeholders, ensuring transparency and accountability
+                at every level of the organization.
               </p>
 
               <div className="mt-8 overflow-hidden rounded-[1.25rem]">
@@ -100,13 +110,13 @@ export default function TransformationPage() {
               </div>
 
               <div className="mt-8">
-                <a
-                  href="mailto:info@lifewood.com"
+                <Link
+                  href="/contact"
                   className="group inline-flex items-center gap-2 rounded-full bg-[var(--lw-green)] px-6 py-3 text-[0.88rem] font-semibold text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(4,98,65,0.2)] active:scale-[0.97]"
                 >
                   Partner with us
                   <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -115,7 +125,7 @@ export default function TransformationPage() {
               {esgData.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[1.25rem] bg-[var(--lw-green)] p-7 text-left shadow-[0_16px_48px_rgba(4,98,65,0.2)] sm:col-span-1"
+                  className="rounded-[1.25rem] bg-[var(--lw-green)] p-7 text-left shadow-[0_16px_48px_rgba(4,98,65,0.2)]"
                 >
                   <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
                     <item.icon size={20} className="text-white" strokeWidth={1.5} />
@@ -131,6 +141,58 @@ export default function TransformationPage() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ESG Pillars */}
+      <section className="bg-[var(--lw-white)] py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--lw-saffron)]">
+              Our framework
+            </span>
+            <h2 className="mt-4 text-balance text-3xl font-bold tracking-tight text-[var(--lw-dark)] sm:text-4xl">
+              The three pillars of our ESG strategy
+            </h2>
+          </div>
+
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            <div className="rounded-[1.5rem] border border-[var(--lw-dark)]/[0.04] bg-[var(--lw-sea-salt)] p-8 lg:p-10">
+              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.15em] text-[var(--lw-saffron)]">Environmental</span>
+              <h3 className="mt-3 text-xl font-bold text-[var(--lw-dark)]">Sustainable operations</h3>
+              <p className="mt-4 text-[0.92rem] leading-[1.75] text-[var(--lw-dark)]/55">
+                We are committed to achieving carbon neutrality by 2030. Our roadmap includes
+                transitioning to 100% renewable energy across all offices, optimizing server
+                efficiency through intelligent workload distribution, and partnering with
+                verified carbon offset programs across Southeast Asia. We conduct quarterly
+                environmental audits and publish our findings transparently.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-[var(--lw-dark)]/[0.04] bg-[var(--lw-sea-salt)] p-8 lg:p-10">
+              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.15em] text-[var(--lw-saffron)]">Social</span>
+              <h3 className="mt-3 text-xl font-bold text-[var(--lw-dark)]">People-first approach</h3>
+              <p className="mt-4 text-[0.92rem] leading-[1.75] text-[var(--lw-dark)]/55">
+                Our workforce reflects the communities we serve. With 60%+ women in our
+                Bangladesh operations and 15%+ differently-abled team members globally, we
+                actively champion diversity, equity, and inclusion. We invest in education
+                through coding bootcamps, AI workshops in universities, and digital literacy
+                programs that build the next generation of tech talent in underserved communities.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-[var(--lw-dark)]/[0.04] bg-[var(--lw-sea-salt)] p-8 lg:p-10">
+              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.15em] text-[var(--lw-saffron)]">Governance</span>
+              <h3 className="mt-3 text-xl font-bold text-[var(--lw-dark)]">Transparent leadership</h3>
+              <p className="mt-4 text-[0.92rem] leading-[1.75] text-[var(--lw-dark)]/55">
+                Strong governance is the foundation of our ESG commitment. Our board includes
+                independent directors with deep expertise in sustainability, technology, and
+                community development. We maintain strict data privacy standards, ethical AI
+                practices, and comprehensive compliance frameworks that meet international
+                standards including ISO 27001 and SOC 2 Type II certification.
+              </p>
             </div>
           </div>
         </div>

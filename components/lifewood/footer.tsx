@@ -10,6 +10,7 @@ const footerLinks = {
     { label: "Projects", href: "/projects" },
     { label: "Transformation", href: "/transformation" },
     { label: "Careers", href: "/careers" },
+    { label: "Contact", href: "/contact" },
   ],
   solutions: [
     { label: "Data Annotation", href: "/services" },
@@ -45,13 +46,13 @@ export function Footer() {
                 with world-class data solutions.
               </p>
             </div>
-            <a
-              href="mailto:info@lifewood.com"
+            <Link
+              href="/contact"
               className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--lw-saffron)] px-7 py-3.5 text-[0.88rem] font-semibold text-[var(--lw-dark)] shadow-[0_4px_16px_rgba(255,179,71,0.3)] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(255,179,71,0.4)] hover:brightness-[1.03]"
             >
               Contact us
               <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

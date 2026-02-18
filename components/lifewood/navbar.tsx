@@ -1,24 +1,39 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { ArrowUpRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { ArrowUpRight, ChevronDown } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const navItems = [
-  { label: "Services", href: "/services" },
-  { label: "Projects", href: "/projects" },
-  { label: "Transformation", href: "/transformation" },
-  { label: "Global Scale", href: "/global" },
-  { label: "Our Company", href: "/about" },
-  { label: "Careers", href: "/careers" },
+const navGroups = [
+  {
+    label: "Solutions",
+    items: [
+      { label: "Services", href: "/services" },
+      { label: "Projects", href: "/projects" },
+    ],
+  },
+  {
+    label: "Company",
+    items: [
+      { label: "About Us", href: "/about" },
+      { label: "ESG & Transformation", href: "/transformation" },
+      { label: "Global Presence", href: "/global" },
+      { label: "Careers", href: "/careers" },
+    ],
+  },
 ]
+
+const flatLinks = navGroups.flatMap((g) => g.items)
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const pathname = usePathname()
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 24)
@@ -31,10 +46,29 @@ export function Navbar() {
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
     setMobileOpen(false)
+    setOpenDropdown(null)
+    setMobileExpanded(null)
   }, [pathname])
+
+  const isGroupActive = (group: typeof navGroups[0]) =>
+    group.items.some((item) => pathname === item.href)
+
+  const handleMouseEnter = (label: string) => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+    setOpenDropdown(label)
+  }
+
+  const handleMouseLeave = () => {
+    closeTimerRef.current = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 150)
+  }
 
   return (
     <header
@@ -56,27 +90,78 @@ export function Navbar() {
           />
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-0.5 lg:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`rounded-lg px-3.5 py-2 text-[0.82rem] font-medium transition-all duration-300 ${
-                pathname === item.href
-                  ? "bg-[var(--lw-green)]/[0.06] text-[var(--lw-green)]"
-                  : "text-[var(--lw-dark)]/60 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
-              }`}
+        {/* Desktop links with dropdowns */}
+        <div className="hidden items-center gap-1 lg:flex">
+          {navGroups.map((group) => (
+            <div
+              key={group.label}
+              className="relative"
+              onMouseEnter={() => handleMouseEnter(group.label)}
+              onMouseLeave={handleMouseLeave}
             >
-              {item.label}
-            </Link>
+              <button
+                className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-[0.82rem] font-medium transition-all duration-300 ${
+                  isGroupActive(group)
+                    ? "bg-[var(--lw-green)]/[0.06] text-[var(--lw-green)]"
+                    : "text-[var(--lw-dark)]/60 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
+                }`}
+                onClick={() => setOpenDropdown(openDropdown === group.label ? null : group.label)}
+                aria-expanded={openDropdown === group.label}
+                aria-haspopup="true"
+              >
+                {group.label}
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-200 ${
+                    openDropdown === group.label ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Dropdown */}
+              <div
+                className={`absolute left-0 top-full pt-1.5 transition-all duration-200 ${
+                  openDropdown === group.label
+                    ? "pointer-events-auto translate-y-0 opacity-100"
+                    : "pointer-events-none -translate-y-1 opacity-0"
+                }`}
+              >
+                <div className="min-w-[200px] overflow-hidden rounded-xl border border-[var(--lw-dark)]/[0.04] bg-[var(--lw-white)] py-1.5 shadow-[0_12px_40px_rgba(19,48,32,0.1)]">
+                  {group.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center px-4 py-2.5 text-[0.84rem] font-medium transition-colors duration-200 ${
+                        pathname === item.href
+                          ? "bg-[var(--lw-green)]/[0.04] text-[var(--lw-green)]"
+                          : "text-[var(--lw-dark)]/60 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
+
+          {/* Direct links */}
+          <Link
+            href="/contact"
+            className={`rounded-lg px-3.5 py-2 text-[0.82rem] font-medium transition-all duration-300 ${
+              pathname === "/contact"
+                ? "bg-[var(--lw-green)]/[0.06] text-[var(--lw-green)]"
+                : "text-[var(--lw-dark)]/60 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
+            }`}
+          >
+            Contact
+          </Link>
         </div>
 
         {/* Right actions */}
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            href="/careers"
+            href="/careers#apply"
             className="group inline-flex items-center gap-1.5 rounded-full bg-[var(--lw-green)] px-5 py-2.5 text-[0.82rem] font-semibold text-white shadow-[0_2px_8px_rgba(4,98,65,0.2)] transition-all duration-300 hover:shadow-[0_4px_16px_rgba(4,98,65,0.3)] hover:brightness-110"
           >
             Apply Now
@@ -119,25 +204,62 @@ export function Navbar() {
         </div>
 
         <div className="px-5 pb-8">
-          {navItems.map((item) => (
-            <div key={item.label} className="border-b border-[var(--lw-dark)]/[0.04] last:border-b-0">
-              <Link
-                href={item.href}
-                className={`flex items-center py-4 text-[0.95rem] font-semibold ${
-                  pathname === item.href
-                    ? "text-[var(--lw-green)]"
-                    : "text-[var(--lw-dark)]"
+          {/* Groups with accordion */}
+          {navGroups.map((group) => (
+            <div key={group.label} className="border-b border-[var(--lw-dark)]/[0.04]">
+              <button
+                onClick={() => setMobileExpanded(mobileExpanded === group.label ? null : group.label)}
+                className={`flex w-full items-center justify-between py-4 text-[0.95rem] font-semibold ${
+                  isGroupActive(group) ? "text-[var(--lw-green)]" : "text-[var(--lw-dark)]"
+                }`}
+                aria-expanded={mobileExpanded === group.label}
+              >
+                {group.label}
+                <ChevronDown
+                  size={16}
+                  className={`text-[var(--lw-dark)]/30 transition-transform duration-200 ${
+                    mobileExpanded === group.label ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  mobileExpanded === group.label ? "max-h-60 pb-2" : "max-h-0"
                 }`}
               >
-                {item.label}
-              </Link>
+                {group.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center py-2.5 pl-4 text-[0.88rem] ${
+                      pathname === item.href
+                        ? "font-semibold text-[var(--lw-green)]"
+                        : "text-[var(--lw-dark)]/60"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           ))}
+
+          {/* Contact direct link */}
+          <div className="border-b border-[var(--lw-dark)]/[0.04]">
+            <Link
+              href="/contact"
+              className={`flex items-center py-4 text-[0.95rem] font-semibold ${
+                pathname === "/contact" ? "text-[var(--lw-green)]" : "text-[var(--lw-dark)]"
+              }`}
+            >
+              Contact
+            </Link>
+          </div>
 
           {/* Mobile bottom actions */}
           <div className="mt-4 flex flex-col gap-3">
             <Link
-              href="/careers"
+              href="/careers#apply"
               className="flex items-center justify-center gap-2 rounded-2xl bg-[var(--lw-green)] py-3.5 text-[0.88rem] font-semibold text-white transition-all active:brightness-95"
             >
               Apply Now
