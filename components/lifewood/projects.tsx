@@ -176,14 +176,14 @@ export function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative h-[520px] lg:h-[560px] shrink-0 w-[85vw] md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-start overflow-hidden rounded-[1.5rem] border transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${isActive
+                className={`group relative h-[520px] lg:h-[560px] shrink-0 w-[85vw] md:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] snap-start overflow-hidden rounded-[1.5rem] border transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isActive
                   ? "border-[var(--lw-green)]/15 shadow-[0_20px_60px_rgba(19,48,32,0.08)] bg-[var(--lw-white)]"
                   : "border-[var(--lw-dark)]/[0.03] bg-[var(--lw-white)] hover:border-[var(--lw-green)]/10 hover:shadow-[0_8px_32px_rgba(19,48,32,0.04)]"
                   }`}
               >
                 {/* Background Image Layer */}
                 <div
-                  className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                  className={`absolute inset-0 bg-cover bg-center transition-all duration-700 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isActive ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
                     }`}
                   style={{ backgroundImage: `url(${project.image})` }}
                 />
@@ -196,7 +196,7 @@ export function Projects() {
                 {/* Content relative wrapper */}
                 <div className="relative z-10 w-full h-full flex flex-col overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {/* Thumbnail for inactive cards */}
-                  <div className={`shrink-0 w-full transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${isActive ? 'h-0 opacity-0' : 'h-48 md:h-52 opacity-100'}`}>
+                  <div className={`shrink-0 w-full transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isActive ? 'h-0 opacity-0' : 'h-48 md:h-52 opacity-100'}`}>
                     <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.image})` }} />
                   </div>
 
@@ -222,7 +222,7 @@ export function Projects() {
                   </div>
 
                   {/* Detail */}
-                  <div className="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] shrink-0">
+                  <div className="grid grid-rows-[1fr] opacity-100 transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] shrink-0">
                     <div className="overflow-hidden">
                       <div className="px-8 pb-8 lg:px-10 lg:pb-10">
                         <div className={`mb-5 h-px transition-colors ${isActive ? "bg-white/20" : "bg-[var(--lw-dark)]/[0.04]"}`} />

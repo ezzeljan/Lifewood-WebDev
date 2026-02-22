@@ -65,9 +65,9 @@ export function Careers() {
                 <button
                   key={b.title}
                   onClick={() => setExpanded(isOpen ? null : i)}
-                  className={`group flex items-start gap-5 rounded-[1.25rem] p-7 text-left transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${isOpen
-                      ? "border border-[var(--lw-green)]/15 bg-[var(--lw-white)] shadow-[0_16px_48px_rgba(19,48,32,0.08)]"
-                      : "border border-[var(--lw-dark)]/[0.03] bg-[var(--lw-sea-salt)] hover:border-[var(--lw-green)]/10 hover:shadow-[0_12px_40px_rgba(19,48,32,0.05)]"
+                  className={`group flex items-start gap-5 rounded-[1.25rem] p-7 text-left transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isOpen
+                    ? "border border-[var(--lw-green)]/15 bg-[var(--lw-white)] shadow-[0_16px_48px_rgba(19,48,32,0.08)]"
+                    : "border border-[var(--lw-dark)]/[0.03] bg-[var(--lw-sea-salt)] hover:border-[var(--lw-green)]/10 hover:shadow-[0_12px_40px_rgba(19,48,32,0.05)]"
                     }`}
                 >
                   <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${isOpen ? "bg-[var(--lw-green)]/10" : "bg-[var(--lw-green)]/[0.05]"

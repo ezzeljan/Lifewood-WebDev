@@ -72,11 +72,10 @@ export function Services() {
             return (
               <div
                 key={service.title}
-                className={`group relative overflow-hidden rounded-[1.5rem] border transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                  isOpen
+                className={`group relative overflow-hidden rounded-[1.5rem] border transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isOpen
                     ? "border-[var(--lw-green)]/15 bg-[var(--lw-white)] shadow-[0_20px_60px_rgba(19,48,32,0.08)]"
                     : "border-[var(--lw-dark)]/[0.03] bg-[var(--lw-sea-salt)] hover:border-[var(--lw-green)]/10 hover:shadow-[0_8px_32px_rgba(19,48,32,0.04)]"
-                }`}
+                  }`}
               >
                 {/* Clickable header area */}
                 <button
@@ -86,9 +85,8 @@ export function Services() {
                   <div className="flex-1">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300 ${
-                          isOpen ? "bg-[var(--lw-green)]/10" : "bg-[var(--lw-green)]/[0.05]"
-                        }`}
+                        className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors duration-300 ${isOpen ? "bg-[var(--lw-green)]/10" : "bg-[var(--lw-green)]/[0.05]"
+                          }`}
                       >
                         <service.icon size={22} className="text-[var(--lw-green)]" strokeWidth={1.5} />
                       </div>
@@ -99,11 +97,10 @@ export function Services() {
                     </div>
                   </div>
                   <div
-                    className={`ml-4 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-                      isOpen
+                    className={`ml-4 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen
                         ? "border-[var(--lw-green)]/20 bg-[var(--lw-green)]/[0.06] rotate-180"
                         : "border-[var(--lw-dark)]/[0.06] bg-transparent"
-                    }`}
+                      }`}
                   >
                     <ChevronDown size={16} className={`transition-colors ${isOpen ? "text-[var(--lw-green)]" : "text-[var(--lw-dark)]/30"}`} />
                   </div>
@@ -111,9 +108,8 @@ export function Services() {
 
                 {/* Expandable content */}
                 <div
-                  className={`grid transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
+                  className={`grid transition-all duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
                 >
                   <div className="overflow-hidden">
                     <div className="px-8 pb-8 lg:px-10 lg:pb-10">
