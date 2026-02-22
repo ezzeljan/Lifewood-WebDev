@@ -1,35 +1,8 @@
-"use client"
-
-import { ArrowRight, Briefcase, Users, Zap, ChevronDown } from "lucide-react"
-import { useState } from "react"
-
-const benefits = [
-  {
-    icon: Zap,
-    title: "Innovation-first culture",
-    summary: "Work on cutting-edge AI technologies.",
-    description:
-      "Work on cutting-edge AI and data technologies shaping the future of machine learning. Our teams collaborate with global tech leaders, contribute to open-source projects, and push the boundaries of automated data processing.",
-  },
-  {
-    icon: Users,
-    title: "Inclusive workplace",
-    summary: "A diverse global team that champions equity.",
-    description:
-      "Join a diverse global team that champions equity, accessibility, and belonging. From flexible work arrangements to mentorship programs, we create an environment where every voice is heard and every talent is valued.",
-  },
-  {
-    icon: Briefcase,
-    title: "Global opportunities",
-    summary: "Grow across our offices worldwide.",
-    description:
-      "Grow your career across our offices in Malaysia, Singapore, China, and beyond. We offer international transfers, cross-team collaborations, and leadership development programs that prepare you for global impact.",
-  },
-]
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { benefits } from "@/lib/data/careers"
 
 export function Careers() {
-  const [expanded, setExpanded] = useState<number | null>(null)
-
   return (
     <section id="careers" className="bg-[var(--lw-white)] py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -44,7 +17,7 @@ export function Careers() {
             </h2>
             <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--lw-dark)]/55">
               We are always looking for passionate, talented people who share
-              our vision. Click each benefit to learn more.
+              our vision.
             </p>
             <div className="mt-8">
               <a
@@ -53,11 +26,11 @@ export function Careers() {
               >
                 View open positions
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* Benefit cards */}
+          {/* Benefit cards -- summary only */}
           <div className="grid gap-4">
             {benefits.map((b, i) => {
               const isOpen = expanded === i

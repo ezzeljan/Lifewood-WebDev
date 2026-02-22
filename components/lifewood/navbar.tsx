@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
-import { Menu, X, ChevronDown, ArrowUpRight, LogIn } from "lucide-react"
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react"
+import { ArrowUpRight, ChevronDown } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
-/* ──────────────────────────── nav data ──────────────────────────── */
-const navItems = [
+const navGroups = [
   {
     label: "Services",
     href: "/#services",
@@ -56,41 +57,49 @@ const navItems = [
   { label: "Careers", href: "/careers" },
 ]
 
-/* ──────────────────────────── component ──────────────────────────── */
+const flatLinks = navGroups.flatMap((g) => g.items)
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
-  const navRef = useRef<HTMLElement>(null)
+  const pathname = usePathname()
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null)
 
-  /* scroll listener */
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 24)
     window.addEventListener("scroll", h, { passive: true })
     return () => window.removeEventListener("scroll", h)
   }, [])
 
-  /* lock body scroll */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
-  /* close dropdown when clicking outside */
-  const handleClickOutside = useCallback((e: MouseEvent) => {
-    if (navRef.current && !navRef.current.contains(e.target as Node)) {
-      setOpenDropdown(null)
-    }
-  }, [])
-
+  // Close menus on route change
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [handleClickOutside])
+    setMobileOpen(false)
+    setOpenDropdown(null)
+    setMobileExpanded(null)
+  }, [pathname])
 
-  const toggleDropdown = (label: string) => {
-    setOpenDropdown(prev => prev === label ? null : label)
+  const isGroupActive = (group: typeof navGroups[0]) =>
+    group.items.some((item) => pathname === item.href)
+
+  const handleMouseEnter = (label: string) => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+    setOpenDropdown(label)
+  }
+
+  const handleMouseLeave = () => {
+    closeTimerRef.current = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 150)
   }
 
   return (
@@ -157,19 +166,23 @@ export function Navbar() {
                   </div>
                 </div>
               </div>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                className="rounded-lg px-3.5 py-2 text-[0.82rem] font-medium text-[var(--lw-dark)]/60 transition-all duration-300 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
-              >
-                {item.label}
-              </a>
-            )
-          )}
+            </div>
+          ))}
+
+          {/* Direct links */}
+          <Link
+            href="/contact"
+            className={`rounded-lg px-3.5 py-2 text-[0.82rem] font-medium transition-all duration-300 ${
+              pathname === "/contact"
+                ? "bg-[var(--lw-green)]/[0.06] text-[var(--lw-green)]"
+                : "text-[var(--lw-dark)]/60 hover:bg-[var(--lw-green)]/[0.03] hover:text-[var(--lw-dark)]"
+            }`}
+          >
+            Contact
+          </Link>
         </div>
 
-        {/* ── Right actions ── */}
+        {/* Right actions */}
         <div className="hidden items-center gap-3 lg:flex">
           <a /*
             href="#admin"
@@ -184,12 +197,12 @@ export function Navbar() {
           >
             Apply Now
             <ArrowUpRight size={13} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
+          </Link>
         </div>
 
-        {/* ── Mobile toggle ── */}
+        {/* Mobile toggle */}
         <button
-          onClick={() => { setMobileOpen(!mobileOpen); setMobileExpanded(null) }}
+          onClick={() => setMobileOpen(!mobileOpen)}
           className="relative z-50 rounded-xl p-2 text-[var(--lw-dark)] transition-colors lg:hidden active:bg-[var(--lw-green)]/[0.05]"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
@@ -201,7 +214,7 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* ── Mobile overlay ── */}
+      {/* Mobile overlay */}
       <div
         className={`fixed inset-0 z-40 bg-[var(--lw-dark)]/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
@@ -209,7 +222,7 @@ export function Navbar() {
         aria-hidden="true"
       />
 
-      {/* ── Mobile drawer (iOS-style slide up sheet) ── */}
+      {/* Mobile drawer */}
       <div
         className={`fixed bottom-0 left-0 right-0 z-40 max-h-[85vh] overflow-y-auto rounded-t-[1.75rem] bg-[var(--lw-white)] shadow-[0_-8px_40px_rgba(0,0,0,0.1)] transition-transform duration-500 ease-[timing-function:cubic-bezier(0.32,0.72,0,1)] lg:hidden ${mobileOpen ? "translate-y-0" : "translate-y-full"
           }`}
@@ -239,34 +252,24 @@ export function Navbar() {
                     className={`grid transition-all duration-400 ease-out ${mobileExpanded === item.label ? "grid-rows-[1fr] pb-3 opacity-100" : "grid-rows-[0fr] opacity-0"
                       }`}
                   >
-                    <div className="overflow-hidden">
-                      <div className="flex flex-col gap-1 pl-1">
-                        {item.children.map((child) => (
-                          <a
-                            key={child.label}
-                            href={child.href}
-                            onClick={() => { setMobileOpen(false); setMobileExpanded(null) }}
-                            className="rounded-xl px-3 py-2.5 transition-colors active:bg-[var(--lw-green)]/[0.04]"
-                          >
-                            <div className="text-[0.88rem] font-medium text-[var(--lw-green)]">{child.label}</div>
-                            <div className="mt-0.5 text-[0.75rem] text-[var(--lw-dark)]/40">{child.desc}</div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <a
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center py-4 text-[0.95rem] font-semibold text-[var(--lw-dark)]"
-                >
-                  {item.label}
-                </a>
-              )}
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           ))}
+
+          {/* Contact direct link */}
+          <div className="border-b border-[var(--lw-dark)]/[0.04]">
+            <Link
+              href="/contact"
+              className={`flex items-center py-4 text-[0.95rem] font-semibold ${
+                pathname === "/contact" ? "text-[var(--lw-green)]" : "text-[var(--lw-dark)]"
+              }`}
+            >
+              Contact
+            </Link>
+          </div>
 
           {/* Mobile bottom actions */}
           <div className="mt-4 flex flex-col gap-3">
@@ -284,7 +287,7 @@ export function Navbar() {
             >
               Apply Now
               <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,48 +1,10 @@
 "use client"
 
-import { Leaf, Users, Heart, BarChart3, ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-
-const esgData = [
-  {
-    icon: Users,
-    stat: 60,
-    suffix: "%+",
-    label: "Women in workforce",
-    summary: "Leading female employment in underrepresented regions.",
-    description:
-      "Our Pottya team in Bangladesh leads the way with high female employment in traditionally underrepresented regions. We actively recruit, train, and promote women into leadership roles across all offices, building a workforce that reflects the communities we serve.",
-  },
-  {
-    icon: Heart,
-    stat: 15,
-    suffix: "%+",
-    label: "People with disabilities",
-    summary: "Meaningful opportunities for differently-abled individuals.",
-    description:
-      "Creating meaningful opportunities for differently-abled individuals across our global operations. We provide adaptive workstations, flexible schedules, and comprehensive support systems that enable every team member to thrive and contribute their unique talents.",
-  },
-  {
-    icon: Leaf,
-    stat: 0,
-    suffix: "",
-    label: "Carbon neutral by 2030",
-    customDisplay: "2030",
-    summary: "Committed to sustainable operations.",
-    description:
-      "Committed to sustainable operations and reducing our environmental footprint year over year. Our roadmap includes transitioning to 100% renewable energy, optimizing server efficiency, and partnering with carbon offset programs across Southeast Asia.",
-  },
-  {
-    icon: BarChart3,
-    stat: 10,
-    suffix: "+",
-    label: "Community programs",
-    summary: "Investing in education and digital literacy.",
-    description:
-      "Investing in education, digital literacy, and skill development across Southeast Asia. From coding bootcamps in rural Bangladesh to AI workshops in Malaysian universities, we're building the next generation of tech talent in underserved communities.",
-  },
-]
+import { esgData } from "@/lib/data/esg"
 
 function CountUp({ end, suffix, customDisplay }: { end: number; suffix: string; customDisplay?: string }) {
   const [count, setCount] = useState(0)
@@ -80,9 +42,6 @@ function CountUp({ end, suffix, customDisplay }: { end: number; suffix: string; 
 }
 
 export function ESG() {
-  const [expanded, setExpanded] = useState<number | null>(null)
-  const [showMore, setShowMore] = useState(false)
-
   return (
     <section id="esg" className="bg-[var(--lw-paper)] py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -134,17 +93,17 @@ export function ESG() {
             </div>
 
             <div className="mt-8">
-              <a
-                href="#contact"
+              <Link
+                href="/transformation"
                 className="group inline-flex items-center gap-2 rounded-full bg-[var(--lw-green)] px-6 py-3 text-[0.88rem] font-semibold text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(4,98,65,0.2)] active:scale-[0.97]"
               >
                 Learn about our impact
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* Right: Click-to-expand stat cards */}
+          {/* Right: stat cards -- summary only */}
           <div className="grid gap-4 sm:grid-cols-2">
             {esgData.map((item, i) => {
               const isOpen = expanded === i

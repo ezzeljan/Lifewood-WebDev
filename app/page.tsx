@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Navbar } from "@/components/lifewood/navbar"
+<<<<<<< Updated upstream
 import { Hero } from "@/components/lifewood/hero"
 import { Services } from "@/components/lifewood/services"
 
@@ -11,11 +11,24 @@ import { Testimonials } from "@/components/lifewood/testimonials"
 
 import { Footer } from "@/components/lifewood/footer"
 import { AnimatedSection } from "@/components/lifewood/animated-section"
+=======
+import { Navbar } from "@/components/lifewood/navbar";
+import { Hero } from "@/components/lifewood/hero";
+import { About } from "@/components/lifewood/about";
+import { Services } from "@/components/lifewood/services";
+import { Projects } from "@/components/lifewood/projects";
+import { Statistics } from "@/components/lifewood/statistics";
+import { ESG } from "@/components/lifewood/esg";
+import { GlobalPresence } from "@/components/lifewood/global-presence";
+import { Testimonials } from "@/components/lifewood/testimonials";
+import { Careers } from "@/components/lifewood/careers";
+import { Footer } from "@/components/lifewood/footer";
+import { AnimatedSection } from "@/components/lifewood/animated-section";
+>>>>>>> Stashed changes
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-x-hidden">
-      <Navbar />
       <Hero />
 
       <AnimatedSection>
@@ -46,5 +59,5 @@ export default function Home() {
 
       <Footer />
     </main>
-  )
+  );
 }

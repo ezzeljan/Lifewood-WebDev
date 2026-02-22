@@ -2,6 +2,7 @@
 
 import { ArrowRight, Play } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState, useRef } from "react"
 
 const heroWords = ["AI data solutions", "smart innovation", "global transformation"]
@@ -72,20 +73,20 @@ export function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#services"
+              <Link
+                href="/services"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-[var(--lw-green)] px-7 py-3.5 text-[0.88rem] font-semibold text-white shadow-[0_4px_20px_rgba(4,98,65,0.25)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(4,98,65,0.35)] active:scale-[0.97]"
               >
                 Explore our services
                 <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-              <a
-                href="#about"
+              </Link>
+              <Link
+                href="/about"
                 className="group inline-flex items-center gap-2 rounded-full border border-[var(--lw-dark)]/10 bg-[var(--lw-white)] px-7 py-3.5 text-[0.88rem] font-semibold text-[var(--lw-dark)] transition-all duration-300 hover:border-[var(--lw-green)]/20 hover:bg-[var(--lw-green)]/[0.03] active:scale-[0.97]"
               >
                 <Play size={14} className="text-[var(--lw-saffron)]" />
                 Watch our story
-              </a>
+              </Link>
             </div>
 
             {/* Trust badges */}
