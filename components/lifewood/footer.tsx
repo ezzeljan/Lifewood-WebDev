@@ -4,23 +4,23 @@ import { Mail, MapPin, Phone, ArrowUpRight, Linkedin, Twitter } from "lucide-rea
 
 const footerLinks = {
   company: [
-    { label: "Our Company", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Projects", href: "#projects" },
-    { label: "Transformation", href: "#esg" },
-    { label: "Careers", href: "#careers" },
+    { label: "Our Company", href: "/about" },
+    { label: "Services", href: "/#services" },
+    { label: "Projects", href: "/projects" },
+    { label: "Transformation", href: "/#esg" },
+    { label: "Careers", href: "/careers" },
   ],
   solutions: [
-    { label: "Data Annotation", href: "#services" },
-    { label: "AI Training Data", href: "#services" },
-    { label: "Data Processing", href: "#services" },
-    { label: "Quality Assurance", href: "#services" },
+    { label: "Data Annotation", href: "/#services" },
+    { label: "AI Training Data", href: "/#services" },
+    { label: "Data Processing", href: "/#services" },
+    { label: "Quality Assurance", href: "/#services" },
   ],
   regions: [
-    { label: "Malaysia (HQ)", href: "#global" },
-    { label: "Singapore", href: "#global" },
-    { label: "China", href: "#global" },
-    { label: "Bangladesh", href: "#global" },
+    { label: "Malaysia (HQ)", href: "/#global" },
+    { label: "Singapore", href: "/#global" },
+    { label: "China", href: "/#global" },
+    { label: "Bangladesh", href: "/#global" },
   ],
 }
 
